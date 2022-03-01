@@ -1,0 +1,151 @@
+* {
+    box-shadow: none !important;
+}
+
+:root {
+    --black: #16191e;
+    --white: #e6e9ee;
+    --accent: #6a29fa;
+    --accent-light: #a36aff;
+}
+
+body,
+html,
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+    /* font-family: 'IBM Plex Mono', monospace !important; */
+    font-family: 'Gilroy', sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+    overflow-y: auto;
+    height: 100%;
+}
+
+.makeStyles-paper-11,
+.makeStyles-paper-11 h2,
+.MuiTypography-body1,
+.MuiPaper-root,
+.MuiPaper-root h2 {
+    /* color: #2c2560 !important; */
+    color: var(--white) !important;
+}
+
+.MuiPaper-elevation1 {
+    box-shadow: none !important;
+    background-color: #ffffff22 !important;
+    backdrop-filter: blur(15px);
+    border-radius: 10px !important;
+    border: 1px solid var(--white);
+}
+
+.MuiCard-root {
+    background-color: #ffffff22 !important;
+    backdrop-filter: blur(15px);
+    border-radius: 10px !important;
+}
+
+.MuiButton-contained {
+    border-radius: 4px !important;
+}
+.MuiAlert-message{
+    color:black;
+}
+.MuiAlert-icon{
+    color:black;
+}
+.MuiTypography-body1{
+    font-size: 1.1rem;
+}
+body {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    /* background-position: center center !important;
+  background-attachment: fixed !important;
+  background-size: cover !important; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    /* font-family: 'IBM Plex Mono', cursive !important; */
+    font-family: 'Gilroy' !important;
+}
+
+footer .a:hover {
+    fill: '#DA4567';
+}
+
+.MuiToolbar-regular {
+    /* color: #e0e3bd; */
+    color: var(--white);
+}
+
+
+/* .MuiButton-containedPrimary,
+.MuiButton-containedPrimary:hover,
+.MuiListItem-button:hover,
+.MuiButtonBase-root:hover {
+  color: #fff !important;
+} */
+
+.MuiButton-contained {
+    color: var(--black) !important;
+    background-color: var(--white) !important;
+}
+
+.MuiButton-contained:hover {
+    background-color: #bfb6ff !important;
+}
+
+.MuiButton-containedPrimary {
+    color: var(--white) !important;
+    background-color: var(--accent) !important;
+}
+
+.MuiButton-containedPrimary:hover {
+    background-color: #2c2560 !important;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.wallet-button {
+    color: #2c2560 !important;
+    /* font-family: 'IBM Plex Mono', monospace !important; */
+    font-family: 'Gilroy', sans-serif !important;
+    font-size: 1.1rem !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    text-transform: none !important;
+    padding: 15px 8px !important;
+}
+
+.wallet-button:hover {
+    background-color: black !important;
+    color: #757ce8 !important;
+}
+
+@media (max-width: 600px) {
+    .devilLogo {
+        position: relative !important;
+        width: 70% !important;
+        height: auto !important;
+        margin-left: 7.5%;
+        margin-right: 7.5%;
+    }
+}
