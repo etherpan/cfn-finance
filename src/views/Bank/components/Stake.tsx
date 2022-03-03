@@ -1,4 +1,4 @@
-import React, { useMemo, useContext } from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
 // import Button from '../../../components/Button';
@@ -10,7 +10,7 @@ import { AddIcon, RemoveIcon } from '../../../components/icons';
 import IconButton from '../../../components/IconButton';
 import Label from '../../../components/Label';
 import Value from '../../../components/Value';
-import { ThemeContext } from 'styled-components';
+// import { ThemeContext } from 'styled-components';
 
 import useApprove, { ApprovalState } from '../../../hooks/useApprove';
 import useModal from '../../../hooks/useModal';
@@ -36,7 +36,7 @@ interface StakeProps {
 const Stake: React.FC<StakeProps> = ({ bank }) => {
   const [approveStatus, approve] = useApprove(bank.depositToken, bank.address);
 
-  const { color: themeColor } = useContext(ThemeContext);
+  // const { color: themeColor } = useContext(ThemeContext);
   const tokenBalance = useTokenBalance(bank.depositToken);
   const stakedBalance = useStakedBalance(bank.contract, bank.poolId);
   const stakedTokenPriceInDollars = useStakedTokenPriceInDollars(bank.depositTokenName, bank.depositToken);
@@ -64,7 +64,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
     />,
   );
 
-  const [onPresentZap, onDissmissZap] = useModal(
+  const [onDissmissZap] = useModal(
     <ZapModal
       decimals={bank.depositToken.decimal}
       onConfirm={(zappingToken, tokenName, amount) => {
@@ -95,7 +95,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
         <StyledCardContentInner>
           <StyledCardHeader>
             <CardIcon>
-              <TokenSymbol symbol={bank.depositToken.symbol} size={54} />
+              <TokenSymbol symbol={bank.depositToken.symbol} size={96} />
             </CardIcon>
             <Value value={getDisplayBalance(stakedBalance, bank.depositToken.decimal)} />
             <Label text={`≈ $${earnedInDollars}`} color='#fffa'/>
@@ -124,7 +124,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
                 <StyledActionSpacer />
                 {/* <StyledActionSpacer />
                 <IconButton
-                  disabled={bank.closedForStaking || bank.depositTokenName === 'GRAVE-AVAX-LP'}
+                  disabled={bank.closedForStaking || bank.depositTokenName === 'CFN-AVAX-LP'}
                   onClick={() => (bank.closedForStaking ? null : onPresentZap())}
                 >
                   <FlashOnIcon style={{ color: themeColor.grey[400] }} />

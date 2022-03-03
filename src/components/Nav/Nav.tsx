@@ -24,6 +24,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
+import banner from '../../assets/img/banner.png';
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     color: '#FFF',
-    'background-color': '#5f4aff22',
+    'background-color': '#45484f4d',
     // borderBottom: `1px solid ${theme.palette.divider}`,
     'backdrop-filter': "blur(2px)",
     padding: '0 10px',
@@ -74,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   brandLink: {
+    display: 'flex',
     textDecoration: 'none',
     color: 'var(--white)',
     '&:hover': {
@@ -103,21 +105,20 @@ const Nav = () => {
 				{matches ? (
 					<>
 						<Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-							{/* <a className={ classes.brandLink } href="/">grave Finance</a> */}
 							<Link to="/" color="inherit" className={classes.brandLink}>
-								grave
+                <img width="300px" alt="caffeinefundlogo" src={banner}></img>
 							</Link>
 						</Typography>
 						<Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-							<a className={classes.link} target="_blank" href="https://github.com/grave/audit/blob/main/grave_Audit_Jan2022.pdf">Audited by</a>
-							<img width="125px" height="30px" src="https://spadetech.io/wp-content/uploads/elementor/thumbs/logo-2-p6mxojhv426tba93lpzfx3ft1m3dvq0k2hu2abrgi4.png"></img>
+							<a className={classes.link} target="_blank" rel="noopener noreferrer" href="https://github.com/cfn/audit/blob/main/cfn_Audit_Jan2022.pdf">Audited by</a>
+							<img width="125px" height="30px" alt="auditlogo" src="https://spadetech.io/wp-content/uploads/elementor/thumbs/logo-2-p6mxojhv426tba93lpzfx3ft1m3dvq0k2hu2abrgi4.png"></img>
 						</Typography>
 						<Box mr={5}>
 							<Link color="textPrimary" to="/" className={classes.link}>
 								Home
 							</Link>
 							<Link color="textPrimary" to="/farms" className={classes.link}>
-								2Farms
+								Farms
 							</Link>
 							<Link color="textPrimary" to="/boardroom" className={classes.link}>
 								Boardroom
@@ -137,24 +138,18 @@ const Nav = () => {
               <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
               </Link> */}
-							<a target="_blank" href="https://3omb.finance/rebates" className={classes.link}>
+							{/* <a target="_blank" href="https://3omb.finance/rebates" className={classes.link}>
 								3DAO
 							</a>
 							<a target="_blank" href="https://www.devilfinance.io" className={classes.link}>
 								Vaults
-							</a>
-							{/* <a target="_blank" href="https://snapshot.org/#/forgiving.forg.eth" className={classes.link}>
-								Governance
 							</a> */}
-							{/* <a target="_blank" href="https://docs.grave.finance/contracts/tokens" className={classes.link}>
-                Contracts
-              </a> */}
-              <a target="_blank" rel="noopener noreferrer" href="https://docs.grave.finance" className={classes.link}>
+              <a target="_blank" rel="noopener noreferrer" href="https://docs.cfn.finance" className={classes.link}>
                 Docs
               </a>
-              <a target="_blank" rel="noopener noreferrer" href="https://3omb.finance/" className={classes.link}>
+              {/* <a target="_blank" rel="noopener noreferrer" href="https://3omb.finance/" className={classes.link}>
                 3omb
-              </a>
+              </a> */}
             </Box>
             <AccountButton text="Connect" />
           </>
@@ -170,13 +165,12 @@ const Nav = () => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              grave
+              CaffeineFund 
             </Typography>
 
             <Drawer
               className={classes.drawer}
-              onEscapeKeyDown={handleDrawerClose}
-              onBackdropClick={handleDrawerClose}
+              onClose={handleDrawerClose}
               variant="temporary"
               anchor="left"
               open={open}
@@ -192,28 +186,28 @@ const Nav = () => {
               <Divider />
               <List>
                 <ListItemLink primary="HOME" to="/" />
-                <ListItemLink primary="2FARMS" to="/farms" />
+                <ListItemLink primary="FARMS" to="/farms" />
                 <ListItemLink primary="BOARDROOM" to="/boardroom" />
                 <ListItemLink primary="BONDS" to="/bonds" />
-                {/* <ListItemLink primary="DIVIDENDS" to="/dividends" /> */}
-                {/* <ListItemLink primary="SBS" to="/sbs" />
+                {/* <ListItemLink primary="DIVIDENDS" to="/dividends" />
+                <ListItemLink primary="SBS" to="/sbs" />
                 <ListItemLink primary="Liquidity" to="/liquidity" />
-                <ListItemLink primary="Regulations" to="/regulations" /> */}
+                <ListItemLink primary="Regulations" to="/regulations" />
                 <ListItem button component="a" href="https://3omb.finance/rebates">
                   <ListItemText>3DAO</ListItemText>
                 </ListItem>
                 <ListItem button component="a" href="https://www.devilfinance.io">
                   <ListItemText>VAULTS</ListItemText>
                 </ListItem>
-                {/* <ListItem button component="a" href="https://snapshot.org/#/forgiving.forg.eth">
+                <ListItem button component="a" href="https://snapshot.org/#/forgiving.forg.eth">
                   <ListItemText>GOVERNANCE</ListItemText>
                 </ListItem> */}
-                <ListItem button component="a" href="https://docs.grave.finance">
+                <ListItem button component="a" href="https://docs.cfn.finance">
                   <ListItemText>DOCS</ListItemText>
                 </ListItem>
-                <ListItem button component="a" href="https://3omb.finance/">
+                {/* <ListItem button component="a" href="https://3omb.finance/">
                   <ListItemText>3OMB</ListItemText>
-                </ListItem>
+                </ListItem> */}
                 <ListItem style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <AccountButton text="Connect" onOpen={handleDrawerClose} />
                 </ListItem>

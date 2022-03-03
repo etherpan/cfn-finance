@@ -22,11 +22,12 @@ export default function TransactionPopup({
 
   return (
     <RowNoFlex>
-      <div style={{ paddingRight: 16 }}>
+      <div style={{ paddingRight: 16, display: 'flex', alignContent:'center' }}>
         {success ? <CheckCircle color={theme.color.teal[200]} size={24} /> : <AlertCircle color="#FF6871" size={24} />}
+        <StyledPopupDesc style={{marginLeft: '10px'}}>{summary ?? 'Hash: ' + hash.slice(0, 8) + '...' + hash.slice(58, 65)}</StyledPopupDesc>
       </div>
       <div>
-        <StyledPopupDesc>{summary ?? 'Hash: ' + hash.slice(0, 8) + '...' + hash.slice(58, 65)}</StyledPopupDesc>
+        <br/>
         {chainId && (
           <StyledLink target="_blank" href={`${config.avaxscanUrl}/tx/${hash}`}>
              View on Avaxscan

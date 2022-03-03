@@ -1,6 +1,6 @@
-export const TOMB_TICKER = 'GRAVE';
-export const TSHARE_TICKER = 'GSHARES';
-export const TBOND_TICKER = 'GBOND';
+export const TOMB_TICKER = 'CFN';
+export const TSHARE_TICKER = 'CSHARE';
+export const TBOND_TICKER = 'CBOND';
 export const AVAX_TICKER = 'AVAX';
 export const WAVAX_TICKER = 'WAVAX';
 export const TRADERJOE_ROUTER_ADDR = '0x60aE616a2155Ee3d9A68541Ba4544862310933d4';

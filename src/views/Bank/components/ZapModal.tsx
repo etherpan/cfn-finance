@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 
-import { Button, Select, MenuItem, InputLabel, Typography, withStyles } from '@material-ui/core';
+import { Button, Select, MenuItem, InputLabel, withStyles } from '@material-ui/core';
 // import Button from '../../../components/Button'
 import Modal, { ModalProps } from '../../../components/Modal';
 import ModalActions from '../../../components/ModalActions';
@@ -35,8 +35,8 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
   const [zappingTokenBalance, setZappingTokenBalance] = useState(avaxBalance);
   const [estimate, setEstimate] = useState({ token0: '0', token1: '0' }); // token0 will always be AVAX in this case
   const [approveZapperStatus, approveZapper] = useApproveZapper(zappingToken);
-  const tombAvaxLpStats = useLpStats('GRAVE-AVAX-LP');
-  const tShareAvaxLpStats = useLpStats('GSHARE-AVAX-LP');
+  const tombAvaxLpStats = useLpStats('CFN-AVAX-LP');
+  const tShareAvaxLpStats = useLpStats('CSHARE-AVAX-LP');
   const tombLPStats = useMemo(() => (tombAvaxLpStats ? tombAvaxLpStats : null), [tombAvaxLpStats]);
   const tshareLPStats = useMemo(() => (tShareAvaxLpStats ? tShareAvaxLpStats : null), [tShareAvaxLpStats]);
   const avaxAmountPerLP = tokenName.startsWith(TOMB_TICKER) ? tombLPStats?.avaxAmount : tshareLPStats?.avaxAmount;
@@ -94,9 +94,9 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
         value={zappingToken}
       >
         <StyledMenuItem value={AVAX_TICKER}>AVAX</StyledMenuItem>
-        <StyledMenuItem value={TSHARE_TICKER}>GSHARES</StyledMenuItem>
+        <StyledMenuItem value={TSHARE_TICKER}>CSHARE</StyledMenuItem>
         {/* Tomb as an input for zapping will be disabled due to issues occuring with the Gatekeeper system */}
-        <StyledMenuItem value={TOMB_TICKER}>GRAVE</StyledMenuItem>
+        <StyledMenuItem value={TOMB_TICKER}>CFN</StyledMenuItem>
       </Select>
       <TokenInput
         onSelectMax={handleSelectMax}
@@ -151,10 +151,10 @@ const StyledDescriptionText = styled.div`
 `;
 const StyledMenuItem = withStyles({
   root: {
-    backgroundColor: 'white',
+    backgroundColor: 'white !important',
     color: '#2c2560',
     '&:hover': {
-      backgroundColor: 'grey',
+      backgroundColor: 'grey !important',
       color: '#2c2560',
     },
     selected: {

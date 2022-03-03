@@ -5,10 +5,10 @@ import Bank from '../Bank';
 
 import { Box, Container, Typography, Grid } from '@material-ui/core';
 
-import { Alert } from '@material-ui/lab';
+// import { Alert } from '@material-ui/lab';
 
 import UnlockWallet from '../../components/UnlockWallet';
-import CountDownTimer from '../../components/Countdown';
+// import CountDownTimer from '../../components/Countdown';
 import Page from '../../components/Page';
 import CemeteryCard from './CemeteryCard';
 import CemeteryImage from '../../assets/img/background.png';

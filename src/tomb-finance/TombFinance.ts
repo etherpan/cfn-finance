@@ -9,13 +9,12 @@ import { getFullDisplayBalance, getDisplayBalance } from '../utils/formatBalance
 import { getDefaultProvider } from '../utils/provider';
 import IUniswapV2PairABI from './IUniswapV2Pair.abi.json';
 import config, { bankDefinitions } from '../config';
-import { genesisDefinitions } from '../config';
 
 import moment from 'moment';
 import { parseUnits } from 'ethers/lib/utils';
 import { AVAX_TICKER, TRADERJOE_ROUTER_ADDR, TOMB_TICKER } from '../utils/constants';
 /**
- * An API module of grave Finance contracts.
+ * An API module of CaffeineFund Finance contracts.
  * All contract-interacting domain logic should be defined in here.
  */
 export class TombFinance {
@@ -32,6 +31,8 @@ export class TombFinance {
   TSHARE: ERC20;
   TBOND: ERC20;
   AVAX: ERC20;
+  TOMBWAVX: ERC20;
+  TSHAREWAVX: ERC20;
 
   constructor(cfg: Configuration) {
     const { deployments, externalTokens } = cfg;
@@ -46,13 +47,15 @@ export class TombFinance {
     for (const [symbol, [address, decimal]] of Object.entries(externalTokens)) {
       this.externalTokens[symbol] = new ERC20(address, provider, symbol, decimal);
     }
-    this.TOMB = new ERC20(deployments.tomb.address, provider, 'GRAVE');
-    this.TSHARE = new ERC20(deployments.tShare.address, provider, 'GSHARES');
-    this.TBOND = new ERC20(deployments.tBond.address, provider, 'GBOND');
+    this.TOMB = new ERC20(deployments.tomb.address, provider, 'CFN');
+    this.TSHARE = new ERC20(deployments.tShare.address, provider, 'CSHARE');
+    this.TBOND = new ERC20(deployments.tBond.address, provider, 'CBOND');
+    this.TOMBWAVX = new ERC20('0x70c4abA67bdB8e5675057c473D61F3D203dD1C38', provider, 'CFN-AVAX-LP');
+    this.TSHAREWAVX = new ERC20('0xfC04889f05752b9E320f753a6eD1d114C2137Ae8', provider, 'CSHARE-AVAX-LP');
     this.AVAX = this.externalTokens['WAVAX'];
 
     // Uniswap V2 Pair
-    this.TOMBWAVAX_LP = new Contract(externalTokens['GRAVE-AVAX-LP'][0], IUniswapV2PairABI, provider);
+    this.TOMBWAVAX_LP = new Contract(externalTokens['CFN-AVAX-LP'][0], IUniswapV2PairABI, provider);
 
     this.config = cfg;
     this.provider = provider;
@@ -120,8 +123,8 @@ export class TombFinance {
     const lpToken = this.externalTokens[name];
     const lpTokenSupplyBN = await lpToken.totalSupply();
     const lpTokenSupply = getDisplayBalance(lpTokenSupplyBN, 18);
-    const token0 = name.startsWith('GRAVE') ? this.TOMB : this.TSHARE;
-    const isTomb = name.startsWith('GRAVE');
+    const token0 = name.startsWith('CFN') ? this.TOMB : this.TSHARE;
+    const isTomb = name.startsWith('CFN');
     const tokenAmountBN = await token0.balanceOf(lpToken.address);
     const tokenAmount = getDisplayBalance(tokenAmountBN, 18);
 
@@ -223,14 +226,11 @@ export class TombFinance {
   async getPoolAPRs(bank: Bank): Promise<PoolStats> {
     if (this.myAccount === undefined) return;
     const depositToken = bank.depositToken;
-    console.log("deposit token:", depositToken);
     const poolContract = this.contracts[bank.contract];
     const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken);
-    console.log("deposit token price:", depositTokenPrice);
     const stakeInPool = await depositToken.balanceOf(bank.address);
-    console.log("stake in pool:", stakeInPool);
     const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
-    const stat = bank.earnTokenName === 'GRAVE' ? await this.getTombStat() : await this.getShareStat();
+    const stat = bank.earnTokenName === 'CFN' ? await this.getTombStat() : await this.getShareStat();
     const tokenPerSecond = await this.getTokenPerSecond(
       bank.earnTokenName,
       bank.contract,
@@ -238,7 +238,6 @@ export class TombFinance {
       bank.depositTokenName,
       bank.poolId
     );
-
     const tokenPerHour = tokenPerSecond.mul(60).mul(60);
     const totalRewardPricePerYear =
       Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24).mul(365)));
@@ -268,9 +267,9 @@ export class TombFinance {
     depositTokenName: string,
     poolId: number
   ) {
-    if (earnTokenName === 'GRAVE') {
+    if (earnTokenName === 'CFN') {
       if (!contractName.endsWith('TombRewardPool')) {
-        const rewardPerSecond = await poolContract.gravePerSecond();
+        const rewardPerSecond = await poolContract.cfnPerSecond();
         const totalAllocPoint = await poolContract.totalAllocPoint();
         const allocPoint = (await poolContract.poolInfo(poolId)).allocPoint;
         return rewardPerSecond.mul(allocPoint).div(totalAllocPoint);
@@ -283,10 +282,12 @@ export class TombFinance {
       }
       return await poolContract.epochGravePerSecond(0);
     }
-    const rewardPerSecond = await poolContract.gSharePerSecond();
-    if (depositTokenName.startsWith('GRAVE-AVAX')) {
+    console.log('log->poolContract', poolContract.address)
+    const rewardPerSecond = await poolContract.cSharePerSecond();
+
+    if (depositTokenName.startsWith('CFN-AVAX')) {
       return rewardPerSecond.mul(30000).div(59500);
-    } else if (depositTokenName.startsWith('GSHARE-AVAX')) {
+    } else if (depositTokenName.startsWith('CSHARE-AVAX')) {
       return rewardPerSecond.mul(24000).div(59500);
     } else {
       return rewardPerSecond.mul(5500).div(59500)
@@ -307,11 +308,11 @@ export class TombFinance {
     if (tokenName === 'WAVAX') {
       tokenPrice = priceOfOneAvaxInDollars;
     } else {
-      if (tokenName === 'GRAVE-AVAX-LP') {
+      if (tokenName === 'CFN-AVAX-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.TOMB, true);
-      } else if (tokenName === 'GSHARE-AVAX-LP') {
+      } else if (tokenName === 'CSHARE-AVAX-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.TSHARE, false);
-      } else if (tokenName === "GRAVE-GSHARE-LP") {
+      } else if (tokenName === "CFN-CSHARE-LP") {
         tokenPrice = await this.getLPTokenPrice(token, this.TOMB, true);
       } else if (tokenName === 'SHIBA') {
         tokenPrice = await this.getTokenPriceFromSpiritswap(token);
@@ -420,11 +421,11 @@ export class TombFinance {
   ): Promise<BigNumber> {
     const pool = this.contracts[poolName];
     try {
-      if (earnTokenName === 'GRAVE') {
-        // problem is pendingGRAVE isnt a function since the abi still says pendingTOMB
-        return await pool.pendingGRAVE(poolId, account);
+      if (earnTokenName === 'CFN') {
+        // problem is pendingCFN isnt a function since the abi still says pendingTOMB
+        return await pool.pendingCFN(poolId, account);
       } else {
-        return await pool.pendingShare(poolId, account);
+        return await pool.pendincShare(poolId, account);
       }
     } catch (err) {
       console.error(`Failed to call earned() on pool ${pool.address}`);
@@ -735,14 +736,20 @@ export class TombFinance {
     if (ethereum && ethereum.networkVersion === config.chainId.toString()) {
       let asset;
       let assetUrl;
-      if (assetName === 'TOMB') {
+      if (assetName === 'CFN') {
         asset = this.TOMB;
         assetUrl = 'https://tomb.finance/presskit/tomb_icon_noBG.png';
-      } else if (assetName === 'TSHARE') {
+      } else if (assetName === 'CSHARE') {
         asset = this.TSHARE;
         assetUrl = 'https://tomb.finance/presskit/tshare_icon_noBG.png';
-      } else if (assetName === 'TBOND') {
+      } else if (assetName === 'CBOND') {
         asset = this.TBOND;
+        assetUrl = 'https://tomb.finance/presskit/tbond_icon_noBG.png';
+      } else if (assetName === 'CFN-WAVAX') {
+        asset = this.TOMBWAVX;
+        assetUrl = 'https://tomb.finance/presskit/tbond_icon_noBG.png';
+      } else {
+        asset = this.TSHAREWAVX;
         assetUrl = 'https://tomb.finance/presskit/tbond_icon_noBG.png';
       }
       await ethereum.request({

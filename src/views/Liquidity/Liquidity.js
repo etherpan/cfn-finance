@@ -36,7 +36,7 @@ const ProvideLiquidity = () => {
   const tombBalance = useTokenBalance(tombFinance.TOMB);
   const avaxBalance = (balance / 1e18).toFixed(4);
   const { onProvideTombAvaxLP } = useProvideTombAvaxLP();
-  const tombAvaxLpStats = useLpStats('GRAVE-AVAX-LP');
+  const tombAvaxLpStats = useLpStats('CFN-AVAX-LP');
 
   const tombLPStats = useMemo(() => (tombAvaxLpStats ? tombAvaxLpStats : null), [tombAvaxLpStats]);
   const tombPriceInAVAX = useMemo(() => (tombStats ? Number(tombStats.tokenInAvax).toFixed(2) : null), [tombStats]);
@@ -84,7 +84,7 @@ const ProvideLiquidity = () => {
         Provide Liquidity
       </Typography>
 
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <Box style={{ width: '600px' }}>
           <Alert variant="filled" severity="warning" style={{ marginBottom: '10px' }}>
             <b>This and <a href="https://spookyswap.finance/"  rel="noopener noreferrer" target="_blank">Spookyswap</a> are the only ways to provide Liquidity on TOMB-AVAX pair without paying tax.</b>

@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 import Page from '../../components/Page';
-import HomeImage from '../../assets/img/background.png';
-import CashImage from '../../assets/img/t_GRAVE-02.png';
+// import HomeImage from '../../assets/img/background.png';
+import CashImage from '../../assets/img/CFN.png';
 import Image from 'material-ui-image';
 import styled from 'styled-components';
 import { Alert } from '@material-ui/lab';
-import { createGlobalStyle } from 'styled-components';
+// import { createGlobalStyle } from 'styled-components';
 import CountUp from 'react-countup';
 import CardIcon from '../../components/CardIcon';
 import TokenSymbol from '../../components/TokenSymbol';
@@ -15,11 +15,9 @@ import useModal from '../../hooks/useModal';
 import useZap from '../../hooks/useZap';
 import useBondStats from '../../hooks/useBondStats';
 import usetShareStats from '../../hooks/usetShareStats';
-import useBurnedGSHARES from '../../hooks/useBurnedGSHARES.js';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 import { tomb as tombTesting, tShare as tShareTesting } from '../../tomb-finance/deployments/deployments.testing.json';
 import { tomb as tombProd, tShare as tShareProd } from '../../tomb-finance/deployments/deployments.mainnet.json';
-
 import MetamaskFox from '../../assets/img/metamask-fox.svg';
 
 import { Box, Button, Card, CardContent, Grid, Paper } from '@material-ui/core';
@@ -28,12 +26,12 @@ import ZapModal from '../Bank/components/ZapModal';
 import { makeStyles } from '@material-ui/core/styles';
 import useTombFinance from '../../hooks/useTombFinance';
 
-const BackgroundImage = createGlobalStyle`
-  body {
-    background: url(${HomeImage}) no-repeat !important;
-    background-size: cover !important;
-  }
-`;
+// const BackgroundImage = createGlobalStyle`
+//   body {
+//     background: url(${HomeImage}) no-repeat !important;
+//     background-size: cover !important;
+//   }
+// `;
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -52,13 +50,13 @@ const Home = () => {
   
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const tombAvaxLpStats = useLpStats('GRAVE-AVAX-LP');
-  const tShareAvaxLpStats = useLpStats('GSHARE-AVAX-LP');
+  const tombAvaxLpStats = useLpStats('CFN-AVAX-LP');
+  const tShareAvaxLpStats = useLpStats('CSHARE-AVAX-LP');
   const tombStats = useTombStats();
   const tShareStats = usetShareStats();
   const tBondStats = useBondStats();
   const tombFinance = useTombFinance();
-  // const { balance } = useBurnedGSHARES();
+  // const { balance } = useBurnedCSHARES();
   const balance = 0;
 
   let tomb;
@@ -108,8 +106,8 @@ const Home = () => {
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
-  const tombLpZap = useZap({ depositTokenName: 'GRAVE-AVAX-LP' });
-  const tshareLpZap = useZap({ depositTokenName: 'GSHARE-AVAX-LP' });
+  const tombLpZap = useZap({ depositTokenName: 'CFN-AVAX-LP' });
+  const tshareLpZap = useZap({ depositTokenName: 'CSHARE-AVAX-LP' });
 
 
 
@@ -121,7 +119,7 @@ const Home = () => {
         tombLpZap.onZap(zappingToken, tokenName, amount);
         onDissmissTombZap();
       }}
-      tokenName={'GRAVE-AVAX-LP'}
+      tokenName={'CFN-AVAX-LP'}
     />,
   );
 
@@ -133,36 +131,36 @@ const Home = () => {
         tshareLpZap.onZap(zappingToken, tokenName, amount);
         onDissmissTshareZap();
       }}
-      tokenName={'GSHARE-AVAX-LP'}
+      tokenName={'CSHARE-AVAX-LP'}
     />,
   );
 
   return (
     <Page>
-      <BackgroundImage />
+      {/* <BackgroundImage /> */}
       <Grid container spacing={3}>
         {/* Logo */}
-        <Grid container item xs={12} sm={3} justify="center">
+        <Grid container item xs={12} sm={4} justifyContent="center">
           {/* <Paper>xs=6 sm=3</Paper> */}
-		  <Image color="none" style={{ width: "235px", height: "235px", objectFit: "contain", paddingTop: '0px' }} src={CashImage} />
+		  <Image color="none" style={{ width: "235px", paddingTop: '0px', height: '235px' }} src={CashImage} />
         </Grid>
         {/* Explanation text */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={8}>
           <Paper>
             <Box p={4}>
-              <h2>Welcome to grave!</h2>
+              <h2>Welcome to CaffeineFund!</h2>
               <p>Pegged to the price of 1 AVAX via seigniorage.</p>
               <p>
-							  <StyledLink href="/farms" style={{ color: '#05147c' }} >Stake</StyledLink> your GRAVE-AVAX LP tokens to earn GSHARE seigniorage rewards.
+							  <StyledLink href="/farms" style={{ color: '#05147c' }} >Stake</StyledLink> your CFN-AVAX LP tokens to earn CSHARE seigniorage rewards.
               </p>
-              <p>To maximize profits, stake your harvested GSHAREs in the <StyledLink href="/boardroom" style={{ color: '#05147c' }} >Boardroom</StyledLink> to earn more GRAVE!</p>
+              <p>To maximize profits, stake your harvested CSHAREs in the <StyledLink href="/boardroom" style={{ color: '#05147c' }} >Boardroom</StyledLink> to earn more CFN!</p>
             </Box>
           </Paper>
         </Grid>		
-        <Grid container justify="center">
-            <Box mt={3} style={{ width: '1000px' }}>
+        <Grid container justifyContent="center">
+            <Box mt={3} mb={1} style={{ padding: '0 10px' }}>
             <Alert variant="filled" severity="warning">
-                Do your own research before investing. Investing is risky and may result in monetary loss. grave is beta software and may contain bugs. By using grave, you agree that the grave and 3omb team is not responsible for any financial losses from investing in grave or 3omb.
+                Do your own research before investing. Investing is risky and may result in monetary loss. CaffeineFund is beta software and may contain bugs. By using CaffeineFund, you agree that the CaffeineFund team is not responsible for any financial losses from investing in CaffeineFund.
             </Alert>
             </Box>
         </Grid>
@@ -201,19 +199,19 @@ const Home = () => {
                 style={{ marginRight: '10px' }}
                 className={classes.button}
               >
-                Buy GRAVE
+                Buy CFN
               </Button>
               {/* <Button variant="contained" target="_blank" href={buyTShareAddress} className={classes.button}>
-                Buy GSHARE
+                Buy CSHARE
               </Button> */}
-              <Button variant="contained" target="_blank" href={buyTombAddress} variant="contained" style={{ marginRight: '10px' }}>
-                Buy GSHARES
+              <Button variant="contained" target="_blank" href={buyTShareAddress} style={{ marginRight: '10px' }}>
+                Buy CSHARE
               </Button>
-              <Button variant="contained" target="_blank" href={`https://dexscreener.com/avalanche/${tomb.address}`} variant="contained" style={{ marginRight: '10px' }}>
-                GRAVE Chart
+              <Button variant="contained" target="_blank" href={`https://dexscreener.com/avalanche/${tomb.address}`} style={{ marginRight: '10px' }}>
+                CFN Chart
               </Button>
-              <Button variant="contained" target="_blank" href={`https://dexscreener.com/avalanche/${tShare.address}`} variant="contained" style={{ marginRight: '10px' }}>
-                GSHARES Chart
+              <Button variant="contained" target="_blank" href={`https://dexscreener.com/avalanche/${tShare.address}`} style={{ marginRight: '10px' }}>
+                CSHARE Chart
               </Button>
             </CardContent>
           </Card>
@@ -223,10 +221,21 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>GRAVE</h2>
+              <h2>CFN</h2>
+              <Button
+                onClick={() => {
+                  tombFinance.watchAssetInMetamask('CFN');
+                }}
+                color="default"
+                variant="outlined"
+                style={{ position: 'absolute', top: '10px', right: '10px' }}
+              >
+                +&nbsp;
+                <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
+              </Button>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="TOMB" />
+                  <TokenSymbol symbol="TOMB" size={110}/>
                 </CardIcon>
               </Box>
               Current Price
@@ -241,7 +250,7 @@ const Home = () => {
               <span style={{ fontSize: '14px' }}>
                 Market Cap: ${(tombCirculatingSupply * tombPriceInDollars).toFixed(2)} <br />
                 Circulating Supply: {tombCirculatingSupply} <br />
-                Total Supply: {tombTotalSupply-140000}
+                Total Supply: {tombTotalSupply}
               </span>
             </CardContent>
           </Card>
@@ -250,7 +259,7 @@ const Home = () => {
         {/* <Grid item xs={12} sm={3}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>GRAVEp</h2>
+              <h2>CFNp</h2>
               <Box mt={2}>
                 <CardIcon>
                   <TokenSymbol symbol="TOMB" />
@@ -278,10 +287,21 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>GSHARES</h2>
+              <h2>CSHARE</h2>
+              <Button
+                onClick={() => {
+                  tombFinance.watchAssetInMetamask('CSHARE');
+                }}
+                color="default"
+                variant="outlined"
+                style={{ position: 'absolute', top: '10px', right: '10px' }}
+              >
+                +&nbsp;
+                <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
+              </Button>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="TSHARE" />
+                  <TokenSymbol symbol="TSHARE" size={110}/>
                 </CardIcon>
               </Box>
               Current Price
@@ -304,10 +324,21 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>GBOND</h2>
+              <h2>CBOND</h2>
+              <Button
+                onClick={() => {
+                  tombFinance.watchAssetInMetamask('CBOND');
+                }}
+                color="default"
+                variant="outlined"
+                style={{ position: 'absolute', top: '10px', right: '10px' }}
+              >
+                +&nbsp;
+                <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
+              </Button>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="TBOND" />
+                  <TokenSymbol symbol="TBOND" size={110}/>
                 </CardIcon>
               </Box>
               Current Price
@@ -333,10 +364,21 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>GRAVE-WAVAX Joe LP</h2>
+              <h2>CFN-WAVAX Joe LP</h2>
+              <Button
+                onClick={() => {
+                  tombFinance.watchAssetInMetamask('CFN-WAVAX');
+                }}
+                color="default"
+                variant="outlined"
+                style={{ position: 'absolute', top: '10px', right: '10px' }}
+              >
+                +&nbsp;
+                <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
+              </Button>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="GRAVE-AVAX-LP" />
+                  <TokenSymbol symbol="CFN-AVAX-LP" size={120}/>
                 </CardIcon>
               </Box>
               <Box mt={2}>
@@ -346,7 +388,7 @@ const Home = () => {
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
-                  {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} GRAVE /{' '}
+                  {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} CFN /{' '}
                   {tombLPStats?.avaxAmount ? tombLPStats?.avaxAmount : '-.--'} AVAX
                 </span>
               </Box>
@@ -361,10 +403,21 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>GSHARES-WAVAX Joe LP</h2>
+              <h2>CSHARE-WAVAX Joe LP</h2>
+              <Button
+                onClick={() => {
+                  tombFinance.watchAssetInMetamask('CSHARE-WAVAX');
+                }}
+                color="default"
+                variant="outlined"
+                style={{ position: 'absolute', top: '10px', right: '10px' }}
+              >
+                +&nbsp;
+                <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
+              </Button>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="GSHARE-AVAX-LP" />
+                  <TokenSymbol symbol="CSHARE-AVAX-LP" size={120}/>
                 </CardIcon>
               </Box>
               <Box mt={2}>
@@ -374,7 +427,7 @@ const Home = () => {
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
-                  {tshareLPStats?.tokenAmount ? tshareLPStats?.tokenAmount : '-.--'} GSHARES /{' '}
+                  {tshareLPStats?.tokenAmount ? tshareLPStats?.tokenAmount : '-.--'} CSHARE /{' '}
                   {tshareLPStats?.avaxAmount ? tshareLPStats?.avaxAmount : '-.--'} AVAX
                 </span>
               </Box>

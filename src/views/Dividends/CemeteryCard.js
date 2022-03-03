@@ -4,7 +4,7 @@ import { Box, Button, Card, CardActions, CardContent, Typography, Grid } from '@
 
 import TokenSymbol from '../../components/TokenSymbol';
 
-import usdc from '../../assets/img/USDC.png'
+// import usdc from '../../assets/img/USDC.png'
 
 const CemeteryCard = ({ bank }) => {
   return (

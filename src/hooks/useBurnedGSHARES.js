@@ -34,7 +34,7 @@ const treasuryAddress = "0x8f555E00ea0FAc871b3Aa70C015915dB094E7f88"
 //     return prices
 // }
 
-function useBurnedGSHARES() {
+function useBurnedCSHARE() {
     const [balance, setBalance] = useState(0)
 
     useEffect(() => {
@@ -57,4 +57,4 @@ function useBurnedGSHARES() {
     }
 }
 
-export default useBurnedGSHARES
+export default useBurnedCSHARE

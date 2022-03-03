@@ -1,11 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Grid, Typography, Link } from '@material-ui/core';
+import { Container, Grid, Typography } from '@material-ui/core';
 import TwitterImage from '../../assets/img/twitter.svg';
 import GithubImage from '../../assets/img/github.svg';
 import TelegramImage from '../../assets/img/telegram.svg';
 import DiscordImage from '../../assets/img/discord.svg';
-import YoutubeImage from '../../assets/img/youtube.svg';
+// import YoutubeImage from '../../assets/img/youtube.svg';
 
 const useStyles = makeStyles((theme) => ({
 	footer: {
@@ -43,13 +43,13 @@ const Footer = () => {
 				<Grid container>
 					<Grid item xs={6}>
 						<Typography variant="body2" color="textSecondary" align="left">
-							{'Copyright © grave Finance '}
+							{'Copyright © CaffeineFund Finance '}
 							{new Date().getFullYear()}
 						</Typography>
 					</Grid>
 					<Grid item xs={6} style={{ textAlign: 'right' }}>
 						<a
-							href="https://twitter.com/_grave"
+							href="https://twitter.com/_cfn"
 							rel="noopener noreferrer"
 							target="_blank"
 							className={classes.link}
@@ -60,14 +60,14 @@ const Footer = () => {
 							<img alt="telegram" src={TelegramImage} className={classes.img} />
 						</a>
 						<a
-							href="https://github.com/grave"
+							href="https://github.com/cfn"
 							rel="noopener noreferrer"
 							target="_blank"
 							className={classes.link}
 						>
 							<img alt="github" src={GithubImage} className={classes.img} />
 						</a>
-						<a href="https://discord.gg/grave" rel="noopener noreferrer" target="_blank" className={classes.link}>
+						<a href="https://discord.gg/cfn" rel="noopener noreferrer" target="_blank" className={classes.link}>
 							<img alt="discord" src={DiscordImage} className={classes.img} />
 						</a>
 					</Grid>

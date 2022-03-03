@@ -10,6 +10,7 @@ import useTombFinance from '../../../hooks/useTombFinance';
 import Label from '../../../components/Label';
 import TokenSymbol from '../../../components/TokenSymbol';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import useModal from '../../../hooks/useModal';
 import ExchangeModal from './ExchangeModal';
@@ -29,6 +30,8 @@ interface ExchangeCardProps {
 	disabled?: boolean;
 	disabledDescription?: string;
 }
+
+const faPropIcon = faArrowRight as IconProp;
 
 const ExchangeCard: React.FC<ExchangeCardProps> = ({
 	action,
@@ -69,16 +72,16 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
 					<StyledExchanger>
 						<StyledToken>
 							<StyledCardIcon style={{ background: 'transparent' }}>
-								<TokenSymbol symbol={fromToken.symbol} size={54} />
+								<TokenSymbol symbol={fromToken.symbol === 'CFN' ? 'TOMB' : 'TBOND'} size={54} />
 							</StyledCardIcon>
 							<Label text={fromTokenName} variant="normal" color='white' />
 						</StyledToken>
 						<StyledExchangeArrow>
-							<FontAwesomeIcon icon={faArrowRight} />
+							<FontAwesomeIcon icon = {faPropIcon} />
 						</StyledExchangeArrow>
 						<StyledToken>
 							<StyledCardIcon style={{ background: 'transparent' }}>
-								<TokenSymbol symbol={toToken.symbol} size={54} />
+								<TokenSymbol symbol={toToken.symbol === 'CFN' ? 'TOMB' : 'TBOND' } size={54} />
 							</StyledCardIcon>
 							<Label text={toTokenName} variant="normal" color='white' />
 						</StyledToken>

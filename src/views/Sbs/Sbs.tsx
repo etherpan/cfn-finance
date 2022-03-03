@@ -142,7 +142,7 @@ const Sbs: React.FC = () => {
                                 onChange={handleTShareChange}
                                 value={tshareAmount}
                                 max={tshareBalance}
-                                symbol="GSHARES"
+                                symbol="CSHARE"
                               ></TokenInput>
                             </Grid>
                             <StyledDesc>{`${tshareBalance} TSHARE Available in Swapper`}</StyledDesc>

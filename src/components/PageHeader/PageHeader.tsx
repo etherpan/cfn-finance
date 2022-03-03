@@ -23,7 +23,7 @@ const StyledPageHeader = styled.div`
   flex-direction: column;
   padding-bottom: ${(props) => props.theme.spacing[6]}px;
   padding-top: ${(props) => props.theme.spacing[6]}px;
-  max-width: 512px;
+  max-width: 800px;
   width: 100%;
   margin: 0 auto;
 `;

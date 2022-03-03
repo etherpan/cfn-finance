@@ -26,15 +26,15 @@ import useTotalStakedOnMasonry from '../../hooks/useTotalStakedOnMasonry';
 import useClaimRewardCheck from '../../hooks/masonry/useClaimRewardCheck';
 import useWithdrawCheck from '../../hooks/masonry/useWithdrawCheck';
 import ProgressCountdown from './components/ProgressCountdown';
-import MasonryImage from '../../assets/img/background.png';
-import { createGlobalStyle } from 'styled-components';
+// import MasonryImage from '../../assets/img/background.png';
+// import { createGlobalStyle } from 'styled-components';
 
-const BackgroundImage = createGlobalStyle`
-  body, html {
-    background: url(${MasonryImage}) no-repeat !important;
-    background-size: cover !important;
-  }
-`;
+// const BackgroundImage = createGlobalStyle`
+//   body, html {
+//     background: url(${MasonryImage}) no-repeat !important;
+//     background-size: cover !important;
+//   }
+// `;
 
 const useStyles = makeStyles((theme) => ({
   gridItem: {
@@ -61,14 +61,14 @@ const Masonry = () => {
 
   return (
     <Page>
-      <BackgroundImage />
+      {/* <BackgroundImage /> */}
       {!!account ? (
         <>
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
             Boardroom
           </Typography>
           <Box mt={5}>
-            <Grid container justify="center" spacing={3}>
+            <Grid container justifyContent="center" spacing={3}>
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
                   <CardContent>
@@ -89,7 +89,7 @@ const Masonry = () => {
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
                     <Typography>
-                      GRAVE Price<small>(TWAP)</small>
+                      CFN Price<small>(TWAP)</small>
                     </Typography>
                     <Typography>{scalingFactor}</Typography>
                   </CardContent>
@@ -106,14 +106,14 @@ const Masonry = () => {
               <Grid item xs={12} md={2} lg={2}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography>GSHARES Staked</Typography>
+                    <Typography>CSHARE Staked</Typography>
                     <Typography>{getDisplayBalance(totalStaked)}</Typography>
                   </CardContent>
                 </Card>
               </Grid>
             </Grid>
 
-            <Grid container justify="center">
+            <Grid container justifyContent="center">
               <Box mt={3} style={{ width: '600px' }}>
                 <Alert variant="filled" severity="warning">
                   Staked GSHAREs can only be withdrawn after 2 epochs (12 hours) since deposit. Any time tokens are harvested, deposited, or withdrawn, the lockup timer gets reset.
@@ -167,7 +167,7 @@ const Masonry = () => {
           </Box>
 
           <Box mt={5}>
-            <Grid container justify="center" spacing={3} mt={10}>
+            <Grid container justifyContent="center" spacing={3} mt={10}>
               <Button
                 disabled={stakedBalance.eq(0) || (!canWithdraw && !canClaimReward)}
                 onClick={onRedeem}

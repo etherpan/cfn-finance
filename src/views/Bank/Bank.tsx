@@ -51,7 +51,7 @@ const Bank: React.FC = () => {
           <Alert variant="filled" severity="warning" style={{ maxWidth: "600px", marginBottom: "50px", marginLeft: "auto", marginRight: "auto" }}>
             Genesis Pools have ENDED. Please withdraw your funds.
           </Alert> : <></>}
-        <Grid container justify="center" spacing={3} style={{ marginBottom: '50px' }}>
+        <Grid container justifyContent="center" spacing={3} style={{ marginBottom: '50px' }}>
           <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
             <Card className={classes.gridItem}>
               <CardContent style={{ textAlign: 'center' }}>
@@ -113,14 +113,14 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
 
   let pairName: string;
   let uniswapUrl: string;
-  if (bank.depositTokenName.startsWith("GRAVE-AVAX")) {
-    pairName = 'GRAVE-AVAX pair';
-    uniswapUrl = 'https://spookyswap.finance/add/AVAX/0x7a6e4e3cc2ac9924605dca4ba31d1831c84b44ae';
-  } else if (bank.depositTokenName.startsWith("GSHARE-AVAX")) {
-    pairName = 'GSHARE-AVAX pair';
+  if (bank.depositTokenName.startsWith("CFN-AVAX")) {
+    pairName = 'CFN-AVAX pair';
+    uniswapUrl = 'https://spookyswap.finance/add/AVAX/' + tombAddr;
+  } else if (bank.depositTokenName.startsWith("CSHARE-AVAX")) {
+    pairName = 'CSHARE-AVAX pair';
     uniswapUrl = 'https://spookyswap.finance/add/AVAX/' + tshareAddr;
   } else {
-    pairName = "GRAVE-GSHARE pair";
+    pairName = "CFN-GSHARE pair";
     uniswapUrl = 'https://spookyswap.finance/add/' + tombAddr + '/' + tshareAddr;
   }
   //waiting on jun LFG

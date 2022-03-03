@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import Page from '../../components/Page';
-import PitImage from '../../assets/img/background.png';
-import { createGlobalStyle } from 'styled-components';
+// import PitImage from '../../assets/img/background.png';
+// import { createGlobalStyle } from 'styled-components';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { useWallet } from 'use-wallet';
 import UnlockWallet from '../../components/UnlockWallet';
@@ -20,12 +20,12 @@ import { getDisplayBalance } from '../../utils/formatBalance';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../tomb-finance/constants';
 import { Typography } from '@material-ui/core';
 
-const BackgroundImage = createGlobalStyle`
-  body {
-    background: url(${PitImage}) no-repeat !important;
-    background-size: cover !important;
-  }
-`;
+// const BackgroundImage = createGlobalStyle`
+//   body {
+//     background: url(${PitImage}) no-repeat !important;
+//     background-size: cover !important;
+//   }
+// `;
 
 const Pit: React.FC = () => {
 	const { path } = useRouteMatch();
@@ -61,7 +61,7 @@ const Pit: React.FC = () => {
 	return (
 		<Switch>
 			<Page>
-				<BackgroundImage />
+				{/* <BackgroundImage /> */}
 				{!!account ? (
 					<>
 						<Typography color="textPrimary" align="center" variant="h3" gutterBottom>
@@ -75,13 +75,13 @@ const Pit: React.FC = () => {
 								<ExchangeCard
 									action="Purchase"
 									fromToken={tombFinance.TOMB}
-									fromTokenName="GRAVE"
+									fromTokenName="CFN"
 									toToken={tombFinance.TBOND}
-									toTokenName="GBOND"
+									toTokenName="CBOND"
 									priceDesc={
 										!isBondPurchasable
-											? 'GRAVE is over peg'
-											: getDisplayBalance(bondsPurchasable, 18, 4) + ' GBOND available for purchase'
+											? 'CFN is over peg'
+											: getDisplayBalance(bondsPurchasable, 18, 4) + ' CBOND available for purchase'
 									}
 									onExchange={handleBuyBonds}
 									disabled={!bondStat || isBondRedeemable}
@@ -89,14 +89,14 @@ const Pit: React.FC = () => {
 							</StyledCardWrapper>
 							<StyledStatsWrapper>
 								<ExchangeStat
-									tokenName="GRAVE"
+									tokenName="CFN"
 									description="Last-Hour TWAP Price"
 									price={getDisplayBalance(cashPrice, 18, 4)}
 								/>
 								<Spacer size="md" />
 								<ExchangeStat
-									tokenName="GBOND"
-									description="Current Price: (GRAVE)^2"
+									tokenName="CBOND"
+									description="Current Price: (CFN)^2"
 									price={Number(bondStat?.tokenInAvax).toFixed(2) || '-'}
 								/>
 							</StyledStatsWrapper>
@@ -104,13 +104,13 @@ const Pit: React.FC = () => {
 								<ExchangeCard
 									action="Redeem"
 									fromToken={tombFinance.TBOND}
-									fromTokenName="GBOND"
+									fromTokenName="CBOND"
 									toToken={tombFinance.TOMB}
-									toTokenName="GRAVE"
-									priceDesc={`${getDisplayBalance(bondBalance)} GBOND Available in wallet`}
+									toTokenName="CFN"
+									priceDesc={`${getDisplayBalance(bondBalance)} CBOND Available in wallet`}
 									onExchange={handleRedeemBonds}
 									disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}
-									disabledDescription={!isBondRedeemable ? `Enabled when GRAVE > ${BOND_REDEEM_PRICE} AVAX` : null}
+									disabledDescription={!isBondRedeemable ? `Enabled when CFN > ${BOND_REDEEM_PRICE} AVAX` : null}
 								/>
 							</StyledCardWrapper>
 						</StyledBond>
