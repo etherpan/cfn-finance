@@ -98,7 +98,7 @@ const Cemetery = () => {
                       <>
                         Pools starting at {from.toUTCString()} and will run for 2 days with a 1% deposit fee.<br/>
                         <div style={{display:'flex'}}>Time until genesis pools end: <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="End Pool" />.</div>
-                        <div>Please refer to <a target="_blank" href="https://cfn-finance.gitbook.io/untitled/" rel="noopener noreferrer">documentation</a> docs to understand our protocol's fee model.</div>
+                        {/* <div>Please refer to <a target="_blank" href="https://cfn-finance.gitbook.io/untitled/" rel="noopener noreferrer">documentation</a> docs to understand our protocol's fee model.</div> */}
                       </>
                     }
                   </Alert>

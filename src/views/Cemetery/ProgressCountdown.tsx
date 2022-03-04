@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import Countdown, { CountdownRenderProps } from 'react-countdown';
 
 interface ProgressCountdownProps {
+  color?: string;
   base: Date;
   deadline: Date;
   hideBar?: boolean;
   description: string;
 }
 
-const ProgressCountdown: React.FC<ProgressCountdownProps> = ({ base, deadline, hideBar, description }) => {
+const ProgressCountdown: React.FC<ProgressCountdownProps> = ({ color, base, deadline, hideBar, description }) => {
 
   const percentage = 
     Date.now() >= deadline.getTime()
@@ -22,7 +23,7 @@ const ProgressCountdown: React.FC<ProgressCountdownProps> = ({ base, deadline, h
     const m = String(minutes);
     const s = String(seconds);
     return (
-      <StyledCountdown>
+      <StyledCountdown style={{ color: color }}>
         {h.padStart(2, '0')}:{m.padStart(2, '0')}:{s.padStart(2, '0')}
       </StyledCountdown>
     );

@@ -12,6 +12,7 @@ export interface BankInfo {
   multiplier: string;
   sort: number;
   finished: boolean;
+  starttime: number;
   closedForStaking: boolean;
   genesisFinished?: boolean;
 }

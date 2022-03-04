@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import { Box, Button, Card, CardActions, CardContent, Typography, Grid } from '@material-ui/core';
 import { tomb , tShare } from '../../tomb-finance/deployments/deployments.mainnet.json';
 import TokenSymbol from '../../components/TokenSymbol';
+import ProgressCountdown from './ProgressCountdown';
 import useStatsForPool from '../../hooks/useStatsForPool';
 
 const CemeteryCard = ({ bank }) => {
@@ -41,13 +43,15 @@ const CemeteryCard = ({ bank }) => {
             <Typography variant="h5" component="h2">
               {bank.depositTokenName}
             </Typography>
+            {Date.now() >= new Date(bank.starttime).getTime() ? null : 
+            <div style={{display:'flex'}}>Starts In: <ProgressCountdown color="#00bcd4" base={moment().toDate()} hideBar={true} deadline={new Date(bank.starttime)} description="start pool" /></div> }
             <Typography color="textSecondary">
               {/* {bank.name} */}
-              Deposit <span style={{color: '#00bcd4', fontWeight:'700'}}>{bank.depositTokenName.toUpperCase()}</span>
+              Deposit: <span style={{color: '#00bcd4', fontWeight:'700'}}>{bank.depositTokenName.toUpperCase()}</span>
             </Typography>
               {/* Commenting out for now as it seems to be blocking and site doesnt load properly */}
              <Typography color="textSecondary">
-             Earn <span style={{color: '#00bcd4', fontWeight:'700'}}>{bank.earnTokenName.toUpperCase()} </span>
+             Earn: <span style={{color: '#00bcd4', fontWeight:'700'}}>{bank.earnTokenName.toUpperCase()} </span>
             </Typography>
             <Typography color="textSecondary">
               Daily APR: <span style={{color: '#00bcd4', fontWeight:'700'}}>{bank.closedForStaking || bank.genesisFinished ? '0.00' : statsOnPool?.dailyAPR}%</span>
@@ -65,7 +69,7 @@ const CemeteryCard = ({ bank }) => {
             {bank.depositTokenName.endsWith('LP') ? 'Add LP' : 'Buy'}
           </Button>
           </a>
-          <Button color="primary" size="small" variant="contained" component={Link} to={`/farms/${bank.contract}`}>
+          <Button color="primary" size="small" variant="contained" disabled={Date.now() <= new Date(bank.starttime).getTime()} component={Link} to={`/farms/${bank.contract}`}>
             Stake
           </Button>
         </CardActions>
