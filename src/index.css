@@ -17,7 +17,7 @@ h3,
 h4 {
     margin: 0;
     /* font-family: 'IBM Plex Mono', monospace !important; */
-    font-family: 'Gilroy', sans-serif !important;
+    font-family: 'Montserrat', sans-serif !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -82,7 +82,7 @@ h4,
 h5,
 h6 {
     /* font-family: 'IBM Plex Mono', cursive !important; */
-    font-family: 'Gilroy' !important;
+    font-family: 'Montserrat' !important;
 }
 
 footer .a:hover {
@@ -127,7 +127,7 @@ code {
 .wallet-button {
     color: #0a3769 !important;
     /* font-family: 'IBM Plex Mono', monospace !important; */
-    font-family: 'Gilroy', sans-serif !important;
+    font-family: 'Montserrat', sans-serif !important;
     font-size: 1.1rem !important;
     text-align: left !important;
     justify-content: flex-start !important;

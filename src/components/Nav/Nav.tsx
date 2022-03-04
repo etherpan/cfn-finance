@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'start',
     alignItems: 'center',
-    fontFamily: '"Gilroy"',
+    fontFamily: 'Montserrat',
     fontSize: '30px',
     flexGrow: 1,
   },

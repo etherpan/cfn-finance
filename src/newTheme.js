@@ -31,7 +31,7 @@ const newTheme = createTheme({
     },
     typography: {
         color: '#E6E9EE',
-        fontFamily: ['"Gilroy"', 'sans-serif'].join(','),
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
     },
     components: {
         MuiButton: {

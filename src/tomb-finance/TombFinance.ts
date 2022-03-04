@@ -51,7 +51,7 @@ export class TombFinance {
     this.TSHARE = new ERC20(deployments.tShare.address, provider, 'CSHARE');
     this.TBOND = new ERC20(deployments.tBond.address, provider, 'CBOND');
     this.TOMBWAVX = new ERC20('0x504183690063734eAAd4f53b77729266b28E3b60', provider, 'CFN-AVAX-LP');
-    this.TSHAREWAVX = new ERC20('0x190a83FdaC8560d0e6ED2ab00dDE62D648A46747', provider, 'CSHARE-AVAX-LP');
+    this.TSHAREWAVX = new ERC20('0x190a83FdaC8560d0e6ED2ab00dDE62D648A46747', provider, 'CSHARE-A-LP');
     this.AVAX = this.externalTokens['WAVAX'];
 
     // Uniswap V2 Pair
