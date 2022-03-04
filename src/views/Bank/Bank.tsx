@@ -120,7 +120,7 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
     pairName = 'CSHARE-AVAX pair';
     uniswapUrl = 'https://traderjoexyz.com/pool/AVAX/' + tshareAddr;
   } else {
-    pairName = "CFN-GSHARE pair";
+    pairName = "CFN-CSHARE pair";
     uniswapUrl = 'https://traderjoexyz.com/pool/' + tombAddr + '/' + tshareAddr;
   }
   //waiting on jun LFG

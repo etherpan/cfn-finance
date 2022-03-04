@@ -134,7 +134,7 @@ const Masonry = () => {
             <Grid container justifyContent="center">
               <Box mt={6} style={{width:'800px'}}>
                 <Alert variant="filled" severity="warning">
-                  Staked GSHAREs can only be withdrawn after 2 epochs (12 hours) since deposit. Any time tokens are harvested, deposited, or withdrawn, the lockup timer gets reset.
+                  Staked CSHAREs can only be withdrawn after 2 epochs (12 hours) since deposit. Any time tokens are harvested, deposited, or withdrawn, the lockup timer gets reset.
                 </Alert>
               </Box>
             </Grid>
