@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import moment from 'moment';
 import Page from '../../components/Page';
 // import HomeImage from '../../assets/img/background.png';
 import CashImage from '../../assets/img/CFN.png';
@@ -16,13 +17,17 @@ import useZap from '../../hooks/useZap';
 import useBondStats from '../../hooks/useBondStats';
 import usetShareStats from '../../hooks/usetShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
+import useGenesisPoolAllocationTimes from '../../hooks/useGenesisPoolAllocationTimes';
+import useMeteorPoolAllocationTimes from '../../hooks/useMeteorPoolAllocationTimes';
+import ProgressCountdown from '../Cemetery/ProgressCountdown';
+
 import { tomb as tombTesting, tShare as tShareTesting } from '../../tomb-finance/deployments/deployments.testing.json';
 import { tomb as tombProd, tShare as tShareProd } from '../../tomb-finance/deployments/deployments.mainnet.json';
 import MetamaskFox from '../../assets/img/metamask-fox.svg';
-
+import TwitterImage from '../../assets/img/twitter.svg';
+import DiscordImage from '../../assets/img/discord.svg';
 import { Box, Button, Card, CardContent, Grid, Paper } from '@material-ui/core';
 import ZapModal from '../Bank/components/ZapModal';
-
 import { makeStyles } from '@material-ui/core/styles';
 import useTombFinance from '../../hooks/useTombFinance';
 
@@ -58,6 +63,12 @@ const Home = () => {
   const tombFinance = useTombFinance();
   // const { balance } = useBurnedCSHARES();
   const balance = 0;
+  const { from, to } = useGenesisPoolAllocationTimes();
+  const { from: mfrom, to: mto } = useMeteorPoolAllocationTimes();
+  const isStart = Date.now() >= from.getTime();
+  const isOver = Date.now() >= to.getTime();
+  const isMStart = Date.now() >= mfrom.getTime();
+  const isMOver = Date.now() >= mto.getTime();
 
   let tomb;
   let tShare;
@@ -149,11 +160,24 @@ const Home = () => {
           <Paper>
             <Box p={4}>
               <h2>Welcome to CaffeineFund!</h2>
-              <p>Pegged to the price of 1 AVAX via seigniorage.</p>
+              <p>Pegged to the price of 0.1 AVAX via seigniorage.</p>
               <p>
 							  <StyledLink href="/farms" style={{ color: '#05147c' }} >Stake</StyledLink> your CFN-AVAX LP tokens to earn CSHARE seigniorage rewards.
               </p>
               <p>To maximize profits, stake your harvested CSHAREs in the <StyledLink href="/boardroom" style={{ color: '#05147c' }} >Boardroom</StyledLink> to earn more CFN!</p>
+              { isStart && !isOver ? 
+                <a href="/farm" style={{fontSize:"24px", fontWeight:"600"}}>Genesis Pools are live now!</a> : !isStart ?
+                <div style={{display:'flex'}}>
+                  Genesis Pools Launch In: <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={from} description="Pool Start" />
+                </div> : null 
+              }
+              <br/>
+              { isMStart && !isMOver ? 
+                <a href="/farm" style={{fontSize:"24px", fontWeight:"600"}}>CSHARE Reward Pools are live now!</a> : !isMStart ?
+                <div style={{display:'flex'}}>
+                  CSHARE Reward Pools Launch In: <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={mfrom} description="Pool Start" />
+                </div> : null 
+              }
             </Box>
           </Paper>
         </Grid>		
@@ -165,6 +189,16 @@ const Home = () => {
             </Box>
         </Grid>
 
+        <Grid item xs={12} sm={12} align="center">
+          <Button target="_blank" href="https://twitter.com/CaffeineFund" style={{ margin: '0 10px', backgroundColor:'#1da1f2', padding:'8px 15px' }}>
+            <img alt="twitter" src={TwitterImage} className={classes.img} style={{marginRight:'10px'}}/>
+            Twitter
+          </Button>
+          <Button target="_blank" href="https://discord.gg/9BV3bTd646" style={{ margin: '0 10px', background:'#5865f2', padding:'8px 15px'  }}>
+            <img alt="discord" src={DiscordImage} className={classes.img} style={{marginRight:'10px', width: '18px'}}/>
+            Discord
+          </Button>
+        </Grid>
         {/* TVL */}
         <Grid item xs={12} sm={4}>
           <Card>

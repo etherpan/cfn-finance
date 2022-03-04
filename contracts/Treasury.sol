@@ -976,7 +976,7 @@ contract Treasury is ContractGuard {
 
     // exclusions from total supply
     address[] public excludedFromTotalSupply = [
-        address(0x6eE714A7C17309b57B85A61A161621ACB66DBBD9)
+        address(0x83132692798c7EE0f6F3F878165E7038D13414f8)
     ];
 
     // core components

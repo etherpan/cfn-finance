@@ -11,12 +11,12 @@ interface ExchangeStatProps {
 
 const ExchangeStat: React.FC<ExchangeStatProps> = ({ tokenName, description, price }) => {
   return (
-    <Card>
+    <StyledCard>
       <StyledCardContentInner>
         <StyledCardTitle>{`💰 ${tokenName} = ${price} AVAX`}</StyledCardTitle>
         <StyledDesc>{description}</StyledDesc>
       </StyledCardContentInner>
-    </Card>
+    </StyledCard>
   );
 };
 
@@ -40,4 +40,7 @@ const StyledCardContentInner = styled.div`
   padding: ${(props) => props.theme.spacing[2]}px;
 `;
 
+const StyledCard = styled(Card)`
+  height: 135px;
+`;
 export default ExchangeStat;

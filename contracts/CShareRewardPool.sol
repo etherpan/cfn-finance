@@ -614,8 +614,8 @@ contract CShareRewardPool {
     // The time when cSHARE mining ends.
     uint256 public poolEndTime;
 
-    uint256 public cSharePerSecond = 0.003825874 ether; // 59500 cshare / (180 days * 24h * 60min * 60s)
-    uint256 public runningTime = 180 days; // 180 days
+    uint256 public cSharePerSecond = 0.002550582990 ether; // 59500 cshare / (270 days * 24h * 60min * 60s)
+    uint256 public runningTime = 270 days; // 270 days
     uint256 public constant TOTAL_REWARDS = 59500 ether;
 
     event Deposit(address indexed user, uint256 indexed pid, uint256 amount);

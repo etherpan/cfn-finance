@@ -50,8 +50,8 @@ export class TombFinance {
     this.TOMB = new ERC20(deployments.tomb.address, provider, 'CFN');
     this.TSHARE = new ERC20(deployments.tShare.address, provider, 'CSHARE');
     this.TBOND = new ERC20(deployments.tBond.address, provider, 'CBOND');
-    this.TOMBWAVX = new ERC20('0x70c4abA67bdB8e5675057c473D61F3D203dD1C38', provider, 'CFN-AVAX-LP');
-    this.TSHAREWAVX = new ERC20('0xfC04889f05752b9E320f753a6eD1d114C2137Ae8', provider, 'CSHARE-AVAX-LP');
+    this.TOMBWAVX = new ERC20('0x504183690063734eAAd4f53b77729266b28E3b60', provider, 'CFN-AVAX-LP');
+    this.TSHAREWAVX = new ERC20('0x190a83FdaC8560d0e6ED2ab00dDE62D648A46747', provider, 'CSHARE-AVAX-LP');
     this.AVAX = this.externalTokens['WAVAX'];
 
     // Uniswap V2 Pair
@@ -425,7 +425,7 @@ export class TombFinance {
         // problem is pendingCFN isnt a function since the abi still says pendingTOMB
         return await pool.pendingCFN(poolId, account);
       } else {
-        return await pool.pendincShare(poolId, account);
+        return await pool.pendingShare(poolId, account);
       }
     } catch (err) {
       console.error(`Failed to call earned() on pool ${pool.address}`);
@@ -665,6 +665,27 @@ export class TombFinance {
 
     return { from: prevAllocation, to: nextAllocation };
   }
+
+  async getGenesisPoolStartAndEndTime(): Promise<AllocationTime> {
+    const { TombAvaxRewardPool } = this.contracts;
+    const startTimestamp: BigNumber = await TombAvaxRewardPool.poolStartTime();
+    const endTimestamp: BigNumber = await TombAvaxRewardPool.poolEndTime();
+    const startAllocation = new Date(startTimestamp.mul(1000).toNumber());
+    const endAllocation = new Date(endTimestamp.mul(1000).toNumber());
+
+    return { from: startAllocation, to: endAllocation };
+  }
+
+  async getMeteorPoolStartAndEndTime(): Promise<AllocationTime> {
+    const { TombAvaxLPTShareRewardPool } = this.contracts;
+    const startTimestamp: BigNumber = await TombAvaxLPTShareRewardPool.poolStartTime();
+    const endTimestamp: BigNumber = await TombAvaxLPTShareRewardPool.poolEndTime();
+    const startAllocation = new Date(startTimestamp.mul(1000).toNumber());
+    const endAllocation = new Date(endTimestamp.mul(1000).toNumber());
+
+    return { from: startAllocation, to: endAllocation };
+  }
+
   /**
    * This method calculates and returns in a from to to format
    * the period the user needs to wait before being allowed to claim
@@ -738,19 +759,19 @@ export class TombFinance {
       let assetUrl;
       if (assetName === 'CFN') {
         asset = this.TOMB;
-        assetUrl = 'https://tomb.finance/presskit/tomb_icon_noBG.png';
+        assetUrl = 'https://raw.githubusercontent.com/krypto-dev/cfn-finance/main/src/assets/img/CFN.png';
       } else if (assetName === 'CSHARE') {
         asset = this.TSHARE;
-        assetUrl = 'https://tomb.finance/presskit/tshare_icon_noBG.png';
+        assetUrl = 'https://raw.githubusercontent.com/krypto-dev/cfn-finance/main/src/assets/img/CSHARE.png';
       } else if (assetName === 'CBOND') {
         asset = this.TBOND;
-        assetUrl = 'https://tomb.finance/presskit/tbond_icon_noBG.png';
+        assetUrl = 'https://raw.githubusercontent.com/krypto-dev/cfn-finance/main/src/assets/img/CBOND.png';
       } else if (assetName === 'CFN-WAVAX') {
         asset = this.TOMBWAVX;
-        assetUrl = 'https://tomb.finance/presskit/tbond_icon_noBG.png';
+        assetUrl = 'https://raw.githubusercontent.com/krypto-dev/cfn-finance/main/src/assets/img/CFNWAVX.png';
       } else {
         asset = this.TSHAREWAVX;
-        assetUrl = 'https://tomb.finance/presskit/tbond_icon_noBG.png';
+        assetUrl = 'https://raw.githubusercontent.com/krypto-dev/cfn-finance/main/src/assets/img/CSHAREWAVX.png';
       }
       await ethereum.request({
         method: 'wallet_watchAsset',

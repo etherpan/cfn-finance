@@ -95,14 +95,6 @@ const Masonry = () => {
                   </CardContent>
                 </Card>
               </Grid>
-              <Grid item xs={12} md={2} lg={3} className={classes.gridItem}>
-                <Card className={classes.gridItem}>
-                  <CardContent align="center">
-                    <Typography>APR | Daily | Epoch</Typography>
-                    <Typography>{masonryAPR.toFixed(2)}% | {(masonryAPR / 365).toFixed(2)}% | {(masonryAPR / 365 / 4).toFixed(2)}%</Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
               <Grid item xs={12} md={2} lg={2}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
@@ -112,16 +104,42 @@ const Masonry = () => {
                 </Card>
               </Grid>
             </Grid>
+            <Grid container justifyContent="center" spacing={3}>
+              <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
+                <Card className={classes.gridItem}>
+                  <CardContent align="center">
+                    <Typography>APR</Typography>
+                    <Typography>{masonryAPR.toFixed(2)}%</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
+                <Card className={classes.gridItem}>
+                  <CardContent align="center">
+                    <Typography>Daily</Typography>
+                    <Typography>{(masonryAPR / 365).toFixed(2)}%</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
+                <Card className={classes.gridItem}>
+                  <CardContent align="center">
+                    <Typography>Epoch</Typography>
+                    <Typography>{(masonryAPR / 365 / 4).toFixed(2)}%</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
 
             <Grid container justifyContent="center">
-              <Box mt={3} style={{ width: '600px' }}>
+              <Box mt={6} style={{width:'800px'}}>
                 <Alert variant="filled" severity="warning">
                   Staked GSHAREs can only be withdrawn after 2 epochs (12 hours) since deposit. Any time tokens are harvested, deposited, or withdrawn, the lockup timer gets reset.
                 </Alert>
               </Box>
             </Grid>
 
-            <Box mt={4}>
+            <Box mt={3}>
               <StyledBoardroom>
                 <StyledCardsWrapper>
                   <StyledCardWrapper>
@@ -197,7 +215,7 @@ const StyledBoardroom = styled.div`
 
 const StyledCardsWrapper = styled.div`
   display: flex;
-  width: 600px;
+  width: 800px;
   @media (max-width: 768px) {
     width: 100%;
     flex-flow: column nowrap;

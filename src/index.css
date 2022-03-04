@@ -5,7 +5,7 @@
 :root {
     --black: #16191e;
     --white: #e6e9ee;
-    --accent: #6a29fa;
+    --accent: #0a85ff;
     --accent-light: #a36aff;
 }
 
@@ -33,7 +33,7 @@ body {
 .MuiTypography-body1,
 .MuiPaper-root,
 .MuiPaper-root h2 {
-    /* color: #2c2560 !important; */
+    /* color: #0a3769 !important; */
     color: var(--white) !important;
 }
 
@@ -117,7 +117,7 @@ footer .a:hover {
 }
 
 .MuiButton-containedPrimary:hover {
-    background-color: #2c2560 !important;
+    background-color: #0a3769 !important;
 }
 
 code {
@@ -125,7 +125,7 @@ code {
 }
 
 .wallet-button {
-    color: #2c2560 !important;
+    color: #0a3769 !important;
     /* font-family: 'IBM Plex Mono', monospace !important; */
     font-family: 'Gilroy', sans-serif !important;
     font-size: 1.1rem !important;

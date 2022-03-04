@@ -614,13 +614,14 @@ contract CfnGenesisRewardPool {
     // The time when CFN mining ends.
     uint256 public poolEndTime;
 
-    uint256 public cfnPerSecond = 0.28935 ether; // 50000 CFN / (2 day * 24h * 60min * 60s)
-    uint256 public runningTime = 2 days; // 2 days
+    uint256 public cfnPerSecond = 0.2572 ether; // 50000 CFN / (2 day and 6 hr = ( 2 * 24h + 6 ) * 60min * 60s)
+    uint256 public runningTime = 194400; // 2days and 6hr = 54 hr
     uint256 public constant TOTAL_REWARDS = 50000 ether;
 
     uint256 public constant FEE = 1; // 1%
 
-    address public feeWallet;
+    address public feeWallet1;
+    address public feeWallet2 = 0x19204bb36659f4588b05Cb60B26092D5c2C1f157;
 
     event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
     event Withdraw(address indexed user, uint256 indexed pid, uint256 amount);
@@ -636,7 +637,7 @@ contract CfnGenesisRewardPool {
         poolStartTime = _poolStartTime;
         poolEndTime = poolStartTime + runningTime;
         operator = msg.sender;
-        feeWallet = msg.sender;
+        feeWallet1 = msg.sender;
     }
 
     modifier onlyOperator() {
@@ -769,7 +770,10 @@ contract CfnGenesisRewardPool {
         if (_amount > 0) {
             pool.token.safeTransferFrom(_sender, address(this), _amount);
             uint256 fee = _amount.mul(FEE).div(100);
-            pool.token.safeTransfer(feeWallet, fee);
+            uint256 fee1 = fee.mul(70).div(100);
+            uint256 fee2 = fee.sub(fee1);
+            pool.token.safeTransfer(feeWallet1, fee1);
+            pool.token.safeTransfer(feeWallet2, fee2);
             user.amount = user.amount.add(_amount.sub(fee));
         }
         user.rewardDebt = user.amount.mul(pool.accCfnPerShare).div(1e18);
@@ -824,9 +828,9 @@ contract CfnGenesisRewardPool {
     }
 
     function setFeeWallet(address _feeWallet) external {
-        require(msg.sender == feeWallet, '!fee');
+        require(msg.sender == feeWallet1, '!fee');
         require(_feeWallet != address(0), "zero");
-        feeWallet = _feeWallet;
+        feeWallet1 = _feeWallet;
     }
 
     function governanceRecoverUnsupported(

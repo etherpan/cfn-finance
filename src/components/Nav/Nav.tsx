@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbarTitle: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'start',
     alignItems: 'center',
     fontFamily: '"Gilroy"',
     fontSize: '30px',
@@ -109,10 +109,10 @@ const Nav = () => {
                 <img width="300px" alt="caffeinefundlogo" src={banner}></img>
 							</Link>
 						</Typography>
-						<Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
+						{/* <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
 							<a className={classes.link} target="_blank" rel="noopener noreferrer" href="https://github.com/cfn/audit/blob/main/cfn_Audit_Jan2022.pdf">Audited by</a>
 							<img width="125px" height="30px" alt="auditlogo" src="https://spadetech.io/wp-content/uploads/elementor/thumbs/logo-2-p6mxojhv426tba93lpzfx3ft1m3dvq0k2hu2abrgi4.png"></img>
-						</Typography>
+						</Typography> */}
 						<Box mr={5}>
 							<Link color="textPrimary" to="/" className={classes.link}>
 								Home
@@ -144,7 +144,7 @@ const Nav = () => {
 							<a target="_blank" href="https://www.devilfinance.io" className={classes.link}>
 								Vaults
 							</a> */}
-              <a target="_blank" rel="noopener noreferrer" href="https://docs.cfn.finance" className={classes.link}>
+              <a target="_blank" rel="noopener noreferrer" href="https://cfn-finance.gitbook.io/untitled/" className={classes.link}>
                 Docs
               </a>
               {/* <a target="_blank" rel="noopener noreferrer" href="https://3omb.finance/" className={classes.link}>
@@ -202,7 +202,7 @@ const Nav = () => {
                 <ListItem button component="a" href="https://snapshot.org/#/forgiving.forg.eth">
                   <ListItemText>GOVERNANCE</ListItemText>
                 </ListItem> */}
-                <ListItem button component="a" href="https://docs.cfn.finance">
+                <ListItem button component="a" href="https://cfn-finance.gitbook.io/untitled/">
                   <ListItemText>DOCS</ListItemText>
                 </ListItem>
                 {/* <ListItem button component="a" href="https://3omb.finance/">
