@@ -115,20 +115,20 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   let uniswapUrl: string;
   if (bank.depositTokenName.startsWith("CFN-AVAX")) {
     pairName = 'CFN-AVAX pair';
-    uniswapUrl = 'https://spookyswap.finance/add/AVAX/' + tombAddr;
+    uniswapUrl = 'https://traderjoexyz.com/pool/AVAX/' + tombAddr;
   } else if (bank.depositTokenName.startsWith("CSHARE-AVAX")) {
     pairName = 'CSHARE-AVAX pair';
-    uniswapUrl = 'https://spookyswap.finance/add/AVAX/' + tshareAddr;
+    uniswapUrl = 'https://traderjoexyz.com/pool/AVAX/' + tshareAddr;
   } else {
     pairName = "CFN-GSHARE pair";
-    uniswapUrl = 'https://spookyswap.finance/add/' + tombAddr + '/' + tshareAddr;
+    uniswapUrl = 'https://traderjoexyz.com/pool/' + tombAddr + '/' + tshareAddr;
   }
   //waiting on jun LFG
   return (
     <Card>
       <CardContent>
         <StyledLink href={uniswapUrl} target="_blank">
-          {`Provide or remove liquidity for ${pairName} on SpookySwap`}
+          {`Provide or remove liquidity for ${pairName} on TraderJoe`}
         </StyledLink>
       </CardContent>
     </Card>

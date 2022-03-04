@@ -282,7 +282,6 @@ export class TombFinance {
       }
       return await poolContract.epochGravePerSecond(0);
     }
-    console.log('log->poolContract', poolContract.address)
     const rewardPerSecond = await poolContract.cSharePerSecond();
 
     if (depositTokenName.startsWith('CFN-AVAX')) {

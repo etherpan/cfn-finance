@@ -6,7 +6,6 @@ import TokenSymbol from '../../components/TokenSymbol';
 import useStatsForPool from '../../hooks/useStatsForPool';
 
 const CemeteryCard = ({ bank }) => {
-  console.log('log->bank', bank)
   const statsOnPool = useStatsForPool(bank);
   let getDepositTokenLink;
   if(bank.depositTokenName.endsWith('LP')) {

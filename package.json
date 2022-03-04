@@ -12,8 +12,6 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.58",
     "@reduxjs/toolkit": "^1.4.0",
-    "@spiritswap/sdk": "https://github.com/Layer3Org/spiritswap-sdk",
-    "@spookyswap/sdk": "https://github.com/SpookySwap/spookyswap-sdk",
     "@traderjoe-xyz/sdk": "https://github.com/aikusam/traderjoe-sdk.git",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
