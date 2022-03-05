@@ -165,17 +165,18 @@ const Home = () => {
 							  <StyledLink href="/farms" style={{ color: '#05147c' }} >Stake</StyledLink> your CFN-AVAX LP tokens to earn CSHARE seigniorage rewards.
               </p>
               <p>To maximize profits, stake your harvested CSHAREs in the <StyledLink href="/boardroom" style={{ color: '#05147c' }} >Boardroom</StyledLink> to earn more CFN!</p>
-              { isStart && !isOver ? 
-                <a href="/farm" style={{fontSize:"24px", fontWeight:"600"}}>Genesis Pools are live now!</a> : !isStart ?
-                <div style={{display:'flex'}}>
-                  Genesis Pools Launch In: <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={from} description="Pool Start" />
-                </div> : null 
-              }
-              <br/>
+              
               { isMStart && !isMOver ? 
                 <a href="/farm" style={{fontSize:"24px", fontWeight:"600"}}>CSHARE Reward Pools are live now!</a> : !isMStart ?
                 <div style={{display:'flex'}}>
                   CSHARE Reward Pools Launch In: <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={mfrom} description="Pool Start" />
+                </div> : null 
+              }
+              <br/>
+              { isStart && !isOver ? 
+                <a href="/farm" style={{fontSize:"24px", fontWeight:"600"}}>Genesis Pools are live now!</a> : !isStart ?
+                <div style={{display:'flex'}}>
+                  Genesis Pools Launch In: <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={from} description="Pool Start" />
                 </div> : null 
               }
             </Box>
