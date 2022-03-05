@@ -69,7 +69,7 @@ const CemeteryCard = ({ bank }) => {
             {bank.depositTokenName.endsWith('LP') ? 'Add LP' : 'Buy'}
           </Button>
           </a>
-          <Button color="primary" size="small" variant="contained" disabled={Date.now() <= new Date(bank.starttime).getTime()} component={Link} to={`/farms/${bank.contract}`}>
+          <Button color="primary" size="small" variant="contained" component={Link} to={`/farms/${bank.contract}`}>
             Stake
           </Button>
         </CardActions>
